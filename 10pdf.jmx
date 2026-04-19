@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Nazwa.pl - Podgląd PDF Faktury" enabled="true">
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Pracownicy" enabled="true">
+        <intProp name="ThreadGroup.num_threads">30</intProp>
+        <intProp name="ThreadGroup.ramp_time">60</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">1</intProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="Cookie Manager" enabled="true">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">true</boolProp>
+          <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+        </CookieManager>
+        <hashTree/>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Oszukiwanie Firewalla" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">User-Agent</stringProp>
+              <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="1A. GET Logowanie" enabled="true">
+          <stringProp name="HTTPSampler.domain">server117859.nazwa.pl</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">/dolibarr/dolibarr/htdocs/index.php</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Wyciągnij Token Logowania" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">token_login</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;token&quot;\s+value=&quot;([^&quot;]+)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">BRAK_TOKENA</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
+
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="1B. POST Logowanie" enabled="true">
+          <stringProp name="HTTPSampler.domain">server117859.nazwa.pl</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">/dolibarr/dolibarr/htdocs/index.php?mainmenu=home</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="token" elementType="HTTPArgument"><stringProp name="Argument.name">token</stringProp><stringProp name="Argument.value">${token_login}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="actionlogin" elementType="HTTPArgument"><stringProp name="Argument.name">actionlogin</stringProp><stringProp name="Argument.value">login</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="loginfunction" elementType="HTTPArgument"><stringProp name="Argument.name">loginfunction</stringProp><stringProp name="Argument.value">loginfunction</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="backtopage" elementType="HTTPArgument"><stringProp name="Argument.name">backtopage</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="tz" elementType="HTTPArgument"><stringProp name="Argument.name">tz</stringProp><stringProp name="Argument.value">1</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="tz_string" elementType="HTTPArgument"><stringProp name="Argument.name">tz_string</stringProp><stringProp name="Argument.value">Europe/Warsaw</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="dst_observed" elementType="HTTPArgument"><stringProp name="Argument.name">dst_observed</stringProp><stringProp name="Argument.value">1</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="dst_first" elementType="HTTPArgument"><stringProp name="Argument.name">dst_first</stringProp><stringProp name="Argument.value">2026-03-29T01:59:00Z</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="dst_second" elementType="HTTPArgument"><stringProp name="Argument.name">dst_second</stringProp><stringProp name="Argument.value">2026-10-25T02:59:00Z</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="screenwidth" elementType="HTTPArgument"><stringProp name="Argument.name">screenwidth</stringProp><stringProp name="Argument.value">1920</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="screenheight" elementType="HTTPArgument"><stringProp name="Argument.name">screenheight</stringProp><stringProp name="Argument.value">1081</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="dol_hide_topmenu" elementType="HTTPArgument"><stringProp name="Argument.name">dol_hide_topmenu</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="dol_hide_leftmenu" elementType="HTTPArgument"><stringProp name="Argument.name">dol_hide_leftmenu</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="dol_optimize_smallscreen" elementType="HTTPArgument"><stringProp name="Argument.name">dol_optimize_smallscreen</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="dol_no_mouse_hover" elementType="HTTPArgument"><stringProp name="Argument.name">dol_no_mouse_hover</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="dol_use_jmobile" elementType="HTTPArgument"><stringProp name="Argument.name">dol_use_jmobile</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="username" elementType="HTTPArgument"><stringProp name="Argument.name">username</stringProp><stringProp name="Argument.value">hisentoki</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="password" elementType="HTTPArgument"><stringProp name="Argument.name">password</stringProp><stringProp name="Argument.value">zaq1@WSX</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="2A. GET Lista Faktur" enabled="true">
+          <stringProp name="HTTPSampler.domain">server117859.nazwa.pl</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">/dolibarr/dolibarr/htdocs/compta/facture/list.php</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Wyciągnij ID Pierwszej Faktury" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">facture_id</stringProp>
+            <stringProp name="RegexExtractor.regex">facid=(\d+)</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">BRAK_FAKTURY</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
+
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="2B. GET Karta Faktury" enabled="true">
+          <stringProp name="HTTPSampler.domain">server117859.nazwa.pl</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">/dolibarr/dolibarr/htdocs/compta/facture/card.php</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="facid" elementType="HTTPArgument">
+                <stringProp name="Argument.name">facid</stringProp>
+                <stringProp name="Argument.value">${facture_id}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Wyciągnij Token Faktury" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">token_form</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;token&quot;\s+value=&quot;([^&quot;]+)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">BRAK_TOKENA</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
+
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="2C. POST Generuj PDF" enabled="true">
+          <stringProp name="HTTPSampler.domain">server117859.nazwa.pl</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">/dolibarr/dolibarr/htdocs/compta/facture/card.php</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="action" elementType="HTTPArgument"><stringProp name="Argument.name">action</stringProp><stringProp name="Argument.value">builddoc</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="token" elementType="HTTPArgument"><stringProp name="Argument.name">token</stringProp><stringProp name="Argument.value">${token_form}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="facid" elementType="HTTPArgument"><stringProp name="Argument.name">facid</stringProp><stringProp name="Argument.value">${facture_id}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="model" elementType="HTTPArgument"><stringProp name="Argument.name">model</stringProp><stringProp name="Argument.value">crabe</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="lang" elementType="HTTPArgument"><stringProp name="Argument.name">lang</stringProp><stringProp name="Argument.value">pl_PL</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Wyciągnij Nazwę Pliku PDF" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">pdf_file</stringProp>
+            <stringProp name="RegexExtractor.regex">modulepart=facture[^&quot;]*file=([^&quot;&amp;]+\.pdf)</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">BRAK_PDF</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
+
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="2D. GET Pobierz PDF" enabled="true">
+          <stringProp name="HTTPSampler.domain">server117859.nazwa.pl</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">/dolibarr/dolibarr/htdocs/document.php</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="modulepart" elementType="HTTPArgument"><stringProp name="Argument.name">modulepart</stringProp><stringProp name="Argument.value">facture</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="attachment" elementType="HTTPArgument"><stringProp name="Argument.name">attachment</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="file" elementType="HTTPArgument"><stringProp name="Argument.name">file</stringProp><stringProp name="Argument.value">${pdf_file}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Sprawdź PDF" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message">Błąd pobierania PDF faktury</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
