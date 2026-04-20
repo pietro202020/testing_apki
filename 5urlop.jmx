@@ -11,8 +11,8 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Pracownicy" enabled="true">
-        <intProp name="ThreadGroup.num_threads">30</intProp>
-        <intProp name="ThreadGroup.ramp_time">60</intProp>
+        <intProp name="ThreadGroup.num_threads">5</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController">
@@ -54,7 +54,6 @@
             <stringProp name="RegexExtractor.default">BRAK_TOKENA</stringProp>
             <stringProp name="RegexExtractor.match_number">1</stringProp>
           </RegexExtractor>
-          <hashTree/>
         </hashTree>
 
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="1B. POST Logowanie" enabled="true">
@@ -115,7 +114,6 @@
             <stringProp name="RegexExtractor.default">BRAK_TOKENA</stringProp>
             <stringProp name="RegexExtractor.match_number">1</stringProp>
           </RegexExtractor>
-          <hashTree/>
         </hashTree>
 
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="2B. POST Wyślij Wniosek Urlopowy" enabled="true">
@@ -127,19 +125,23 @@
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
-              <elementProp name="action" elementType="HTTPArgument"><stringProp name="Argument.name">action</stringProp><stringProp name="Argument.value">add</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="token" elementType="HTTPArgument"><stringProp name="Argument.name">token</stringProp><stringProp name="Argument.value">${token_form}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="action" elementType="HTTPArgument"><stringProp name="Argument.name">action</stringProp><stringProp name="Argument.value">add</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="fuserid" elementType="HTTPArgument"><stringProp name="Argument.name">fuserid</stringProp><stringProp name="Argument.value">1</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="type" elementType="HTTPArgument"><stringProp name="Argument.name">type</stringProp><stringProp name="Argument.value">1</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="date_debutday" elementType="HTTPArgument"><stringProp name="Argument.name">date_debutday</stringProp><stringProp name="Argument.value">${__time(d)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="date_debutmonth" elementType="HTTPArgument"><stringProp name="Argument.name">date_debutmonth</stringProp><stringProp name="Argument.value">5</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="date_debutyear" elementType="HTTPArgument"><stringProp name="Argument.name">date_debutyear</stringProp><stringProp name="Argument.value">2026</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="date_finday" elementType="HTTPArgument"><stringProp name="Argument.name">date_finday</stringProp><stringProp name="Argument.value">${__time(d)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="date_finmonth" elementType="HTTPArgument"><stringProp name="Argument.name">date_finmonth</stringProp><stringProp name="Argument.value">5</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="date_finyear" elementType="HTTPArgument"><stringProp name="Argument.name">date_finyear</stringProp><stringProp name="Argument.value">2026</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="halfday" elementType="HTTPArgument"><stringProp name="Argument.name">halfday</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="date_debut_" elementType="HTTPArgument"><stringProp name="Argument.name">date_debut_</stringProp><stringProp name="Argument.value">25.07.${__intSum(2026,${__threadNum})}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="date_debut_day" elementType="HTTPArgument"><stringProp name="Argument.name">date_debut_day</stringProp><stringProp name="Argument.value">25</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="date_debut_month" elementType="HTTPArgument"><stringProp name="Argument.name">date_debut_month</stringProp><stringProp name="Argument.value">7</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="date_debut_year" elementType="HTTPArgument"><stringProp name="Argument.name">date_debut_year</stringProp><stringProp name="Argument.value">${__intSum(2026,${__threadNum})}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="starthalfday" elementType="HTTPArgument"><stringProp name="Argument.name">starthalfday</stringProp><stringProp name="Argument.value">morning</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="date_fin_" elementType="HTTPArgument"><stringProp name="Argument.name">date_fin_</stringProp><stringProp name="Argument.value">27.07.${__intSum(2026,${__threadNum})}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="date_fin_day" elementType="HTTPArgument"><stringProp name="Argument.name">date_fin_day</stringProp><stringProp name="Argument.value">27</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="date_fin_month" elementType="HTTPArgument"><stringProp name="Argument.name">date_fin_month</stringProp><stringProp name="Argument.value">7</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="date_fin_year" elementType="HTTPArgument"><stringProp name="Argument.name">date_fin_year</stringProp><stringProp name="Argument.value">${__intSum(2026,${__threadNum})}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="endhalfday" elementType="HTTPArgument"><stringProp name="Argument.name">endhalfday</stringProp><stringProp name="Argument.value">afternoon</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="valideur" elementType="HTTPArgument"><stringProp name="Argument.name">valideur</stringProp><stringProp name="Argument.value">1</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="description" elementType="HTTPArgument"><stringProp name="Argument.name">description</stringProp><stringProp name="Argument.value">Test urlopu JMeter ${__threadNum}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="fk_validator" elementType="HTTPArgument"><stringProp name="Argument.name">fk_validator</stringProp><stringProp name="Argument.value">1</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="add" elementType="HTTPArgument"><stringProp name="Argument.name">add</stringProp><stringProp name="Argument.value">Dodaj</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="save" elementType="HTTPArgument"><stringProp name="Argument.name">save</stringProp><stringProp name="Argument.value">Tworzenie wniosku urlopowego</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
             </collectionProp>
           </elementProp>
         </HTTPSamplerProxy>
@@ -149,7 +151,7 @@
               <stringProp name="49586">card.php?id=</stringProp>
             </collectionProp>
             <stringProp name="Assertion.custom_message">Błąd dodawania wniosku urlopowego</stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_url</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>

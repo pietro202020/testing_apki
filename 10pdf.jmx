@@ -11,8 +11,8 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Pracownicy" enabled="true">
-        <intProp name="ThreadGroup.num_threads">30</intProp>
-        <intProp name="ThreadGroup.ramp_time">60</intProp>
+        <intProp name="ThreadGroup.num_threads">5</intProp>
+        <intProp name="ThreadGroup.ramp_time">5</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController">
@@ -101,7 +101,7 @@
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Wyciągnij ID Pierwszej Faktury" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">facture_id</stringProp>
-            <stringProp name="RegexExtractor.regex">facid=(\d+)</stringProp>
+            <stringProp name="RegexExtractor.regex">card\.php\?id=(\d+)</stringProp>
             <stringProp name="RegexExtractor.template">$1$</stringProp>
             <stringProp name="RegexExtractor.default">BRAK_FAKTURY</stringProp>
             <stringProp name="RegexExtractor.match_number">1</stringProp>
@@ -149,9 +149,15 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="action" elementType="HTTPArgument"><stringProp name="Argument.name">action</stringProp><stringProp name="Argument.value">builddoc</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="token" elementType="HTTPArgument"><stringProp name="Argument.name">token</stringProp><stringProp name="Argument.value">${token_form}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="page_y" elementType="HTTPArgument"><stringProp name="Argument.name">page_y</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="facid" elementType="HTTPArgument"><stringProp name="Argument.name">facid</stringProp><stringProp name="Argument.value">${facture_id}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="model" elementType="HTTPArgument"><stringProp name="Argument.name">model</stringProp><stringProp name="Argument.value">crabe</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="lang" elementType="HTTPArgument"><stringProp name="Argument.name">lang</stringProp><stringProp name="Argument.value">pl_PL</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="model" elementType="HTTPArgument"><stringProp name="Argument.name">model</stringProp><stringProp name="Argument.value">sponge</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="builddoc_generatebutton" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.name">builddoc_generatebutton</stringProp>
+                <stringProp name="Argument.value">Wygeneruj</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
             </collectionProp>
           </elementProp>
         </HTTPSamplerProxy>
@@ -178,7 +184,13 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="modulepart" elementType="HTTPArgument"><stringProp name="Argument.name">modulepart</stringProp><stringProp name="Argument.value">facture</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="attachment" elementType="HTTPArgument"><stringProp name="Argument.name">attachment</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="file" elementType="HTTPArgument"><stringProp name="Argument.name">file</stringProp><stringProp name="Argument.value">${pdf_file}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="file" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">file</stringProp>
+                <stringProp name="Argument.value">${pdf_file}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="entity" elementType="HTTPArgument"><stringProp name="Argument.name">entity</stringProp><stringProp name="Argument.value">1</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
             </collectionProp>
           </elementProp>
         </HTTPSamplerProxy>

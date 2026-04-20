@@ -11,8 +11,8 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Pracownicy" enabled="true">
-        <intProp name="ThreadGroup.num_threads">30</intProp>
-        <intProp name="ThreadGroup.ramp_time">60</intProp>
+        <intProp name="ThreadGroup.num_threads">5</intProp>
+        <intProp name="ThreadGroup.ramp_time">5</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController">
@@ -127,22 +127,43 @@
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
-              <elementProp name="action" elementType="HTTPArgument"><stringProp name="Argument.name">action</stringProp><stringProp name="Argument.value">add</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="token" elementType="HTTPArgument"><stringProp name="Argument.name">token</stringProp><stringProp name="Argument.value">${token_form}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="action" elementType="HTTPArgument"><stringProp name="Argument.name">action</stringProp><stringProp name="Argument.value">add</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="changecompany" elementType="HTTPArgument"><stringProp name="Argument.name">changecompany</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="backtopage" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.name">backtopage</stringProp>
+                <stringProp name="Argument.value">/dolibarr/dolibarr/htdocs/comm/propal/card.php?id=__ID__</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="ref_client" elementType="HTTPArgument"><stringProp name="Argument.name">ref_client</stringProp><stringProp name="Argument.value">OF_${__Random(10000,99999)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="socid" elementType="HTTPArgument"><stringProp name="Argument.name">socid</stringProp><stringProp name="Argument.value">1</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="date_propalday" elementType="HTTPArgument"><stringProp name="Argument.name">date_propalday</stringProp><stringProp name="Argument.value">${__time(d)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="date_propalmonth" elementType="HTTPArgument"><stringProp name="Argument.name">date_propalmonth</stringProp><stringProp name="Argument.value">${__time(M)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="date_propalyear" elementType="HTTPArgument"><stringProp name="Argument.name">date_propalyear</stringProp><stringProp name="Argument.value">${__time(yyyy)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="fin_validiteday" elementType="HTTPArgument"><stringProp name="Argument.name">fin_validiteday</stringProp><stringProp name="Argument.value">30</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="fin_validitemonth" elementType="HTTPArgument"><stringProp name="Argument.name">fin_validitemonth</stringProp><stringProp name="Argument.value">6</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="fin_validiteyear" elementType="HTTPArgument"><stringProp name="Argument.name">fin_validiteyear</stringProp><stringProp name="Argument.value">2026</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="re" elementType="HTTPArgument"><stringProp name="Argument.name">re</stringProp><stringProp name="Argument.value">20.04.2026</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="reday" elementType="HTTPArgument"><stringProp name="Argument.name">reday</stringProp><stringProp name="Argument.value">20</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="remonth" elementType="HTTPArgument"><stringProp name="Argument.name">remonth</stringProp><stringProp name="Argument.value">04</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="reyear" elementType="HTTPArgument"><stringProp name="Argument.name">reyear</stringProp><stringProp name="Argument.value">2026</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="duree_validite" elementType="HTTPArgument"><stringProp name="Argument.name">duree_validite</stringProp><stringProp name="Argument.value">15</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="cond_reglement_id" elementType="HTTPArgument"><stringProp name="Argument.name">cond_reglement_id</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="mode_reglement_id" elementType="HTTPArgument"><stringProp name="Argument.name">mode_reglement_id</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="fk_account" elementType="HTTPArgument"><stringProp name="Argument.name">fk_account</stringProp><stringProp name="Argument.value">-1</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="note_private" elementType="HTTPArgument"><stringProp name="Argument.name">note_private</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="cond_reglement_id_deposit_percent" elementType="HTTPArgument"><stringProp name="Argument.name">cond_reglement_id_deposit_percent</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="mode_reglement_id" elementType="HTTPArgument"><stringProp name="Argument.name">mode_reglement_id</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="demand_reason_id" elementType="HTTPArgument"><stringProp name="Argument.name">demand_reason_id</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="shipping_method_id" elementType="HTTPArgument"><stringProp name="Argument.name">shipping_method_id</stringProp><stringProp name="Argument.value">-1</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="availability_id" elementType="HTTPArgument"><stringProp name="Argument.name">availability_id</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="date_livraison" elementType="HTTPArgument"><stringProp name="Argument.name">date_livraison</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="date_livraisonday" elementType="HTTPArgument"><stringProp name="Argument.name">date_livraisonday</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="date_livraisonmonth" elementType="HTTPArgument"><stringProp name="Argument.name">date_livraisonmonth</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="date_livraisonyear" elementType="HTTPArgument"><stringProp name="Argument.name">date_livraisonyear</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="projectid" elementType="HTTPArgument"><stringProp name="Argument.name">projectid</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="model" elementType="HTTPArgument"><stringProp name="Argument.name">model</stringProp><stringProp name="Argument.value">cyan</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="note_public" elementType="HTTPArgument"><stringProp name="Argument.name">note_public</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="ref_client" elementType="HTTPArgument"><stringProp name="Argument.name">ref_client</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="add" elementType="HTTPArgument"><stringProp name="Argument.name">add</stringProp><stringProp name="Argument.value">Utwórz ofertę</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="note_private" elementType="HTTPArgument"><stringProp name="Argument.name">note_private</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="createmode" elementType="HTTPArgument"><stringProp name="Argument.name">createmode</stringProp><stringProp name="Argument.value">empty</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="save" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.name">save</stringProp>
+                <stringProp name="Argument.value">Utwórz szkic</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
             </collectionProp>
           </elementProp>
         </HTTPSamplerProxy>
@@ -152,7 +173,7 @@
               <stringProp name="49586">card.php?id=</stringProp>
             </collectionProp>
             <stringProp name="Assertion.custom_message">Błąd tworzenia oferty handlowej</stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_url</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>

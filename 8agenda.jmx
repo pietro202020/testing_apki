@@ -11,8 +11,8 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Pracownicy" enabled="true">
-        <intProp name="ThreadGroup.num_threads">30</intProp>
-        <intProp name="ThreadGroup.ramp_time">60</intProp>
+        <intProp name="ThreadGroup.num_threads">5</intProp>
+        <intProp name="ThreadGroup.ramp_time">5</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController">
@@ -127,33 +127,45 @@
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
-              <elementProp name="action" elementType="HTTPArgument"><stringProp name="Argument.name">action</stringProp><stringProp name="Argument.value">add</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="token" elementType="HTTPArgument"><stringProp name="Argument.name">token</stringProp><stringProp name="Argument.value">${token_form}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="action" elementType="HTTPArgument"><stringProp name="Argument.name">action</stringProp><stringProp name="Argument.value">add</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="donotclearsession" elementType="HTTPArgument"><stringProp name="Argument.name">donotclearsession</stringProp><stringProp name="Argument.value">1</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="page_y" elementType="HTTPArgument"><stringProp name="Argument.name">page_y</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="actioncode" elementType="HTTPArgument"><stringProp name="Argument.name">actioncode</stringProp><stringProp name="Argument.value">50</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="label" elementType="HTTPArgument"><stringProp name="Argument.name">label</stringProp><stringProp name="Argument.value">Wydarzenie testowe JMeter ${__threadNum}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="typecode" elementType="HTTPArgument"><stringProp name="Argument.name">typecode</stringProp><stringProp name="Argument.value">AC_OTH</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="datepday" elementType="HTTPArgument"><stringProp name="Argument.name">datepday</stringProp><stringProp name="Argument.value">${__time(d)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="datepmonth" elementType="HTTPArgument"><stringProp name="Argument.name">datepmonth</stringProp><stringProp name="Argument.value">${__time(M)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="datepyear" elementType="HTTPArgument"><stringProp name="Argument.name">datepyear</stringProp><stringProp name="Argument.value">${__time(yyyy)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="datepHour" elementType="HTTPArgument"><stringProp name="Argument.name">datepHour</stringProp><stringProp name="Argument.value">10</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="datepMin" elementType="HTTPArgument"><stringProp name="Argument.name">datepMin</stringProp><stringProp name="Argument.value">00</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="datefday" elementType="HTTPArgument"><stringProp name="Argument.name">datefday</stringProp><stringProp name="Argument.value">${__time(d)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="datefmonth" elementType="HTTPArgument"><stringProp name="Argument.name">datefmonth</stringProp><stringProp name="Argument.value">${__time(M)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="datefyear" elementType="HTTPArgument"><stringProp name="Argument.name">datefyear</stringProp><stringProp name="Argument.value">${__time(yyyy)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="datefHour" elementType="HTTPArgument"><stringProp name="Argument.name">datefHour</stringProp><stringProp name="Argument.value">11</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="datefMin" elementType="HTTPArgument"><stringProp name="Argument.name">datefMin</stringProp><stringProp name="Argument.value">00</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="apday" elementType="HTTPArgument"><stringProp name="Argument.name">apday</stringProp><stringProp name="Argument.value">${__time(dd)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="apmonth" elementType="HTTPArgument"><stringProp name="Argument.name">apmonth</stringProp><stringProp name="Argument.value">${__time(MM)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="apyear" elementType="HTTPArgument"><stringProp name="Argument.name">apyear</stringProp><stringProp name="Argument.value">${__time(yyyy)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="aphour" elementType="HTTPArgument"><stringProp name="Argument.name">aphour</stringProp><stringProp name="Argument.value">10</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="apmin" elementType="HTTPArgument"><stringProp name="Argument.name">apmin</stringProp><stringProp name="Argument.value">00</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="apsec" elementType="HTTPArgument"><stringProp name="Argument.name">apsec</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="p2day" elementType="HTTPArgument"><stringProp name="Argument.name">p2day</stringProp><stringProp name="Argument.value">${__time(dd)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="p2month" elementType="HTTPArgument"><stringProp name="Argument.name">p2month</stringProp><stringProp name="Argument.value">${__time(MM)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="p2year" elementType="HTTPArgument"><stringProp name="Argument.name">p2year</stringProp><stringProp name="Argument.value">${__time(yyyy)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="p2hour" elementType="HTTPArgument"><stringProp name="Argument.name">p2hour</stringProp><stringProp name="Argument.value">11</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="p2min" elementType="HTTPArgument"><stringProp name="Argument.name">p2min</stringProp><stringProp name="Argument.value">00</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="p2sec" elementType="HTTPArgument"><stringProp name="Argument.name">p2sec</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="percent" elementType="HTTPArgument"><stringProp name="Argument.name">percent</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="note" elementType="HTTPArgument"><stringProp name="Argument.name">note</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="add" elementType="HTTPArgument"><stringProp name="Argument.name">add</stringProp><stringProp name="Argument.value">Dodaj</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="recurid" elementType="HTTPArgument"><stringProp name="Argument.name">recurid</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="limitday" elementType="HTTPArgument"><stringProp name="Argument.name">limitday</stringProp><stringProp name="Argument.value">31</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="add" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.name">add</stringProp>
+                <stringProp name="Argument.value">Dodać</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
             </collectionProp>
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Sprawdź Sukces" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">card.php?id=</stringProp>
+              <stringProp name="49586">disabledefaultvalues=1</stringProp>
             </collectionProp>
             <stringProp name="Assertion.custom_message">Błąd dodawania wydarzenia w Agendzie</stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_url</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>
