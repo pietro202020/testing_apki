@@ -1,0 +1,50 @@
+{
+  "1. GET Strona Logowania" : {
+    "transaction" : "1. GET Strona Logowania",
+    "sampleCount" : 500,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 7020.481999999998,
+    "medianResTime" : 5311.0,
+    "minResTime" : 512.0,
+    "maxResTime" : 19802.0,
+    "pct1ResTime" : 12050.9,
+    "pct2ResTime" : 19674.0,
+    "pct3ResTime" : 19779.97,
+    "throughput" : 25.095362377032725,
+    "receivedKBytesPerSec" : 208.72641231994078,
+    "sentKBytesPerSec" : 4.117207889981931
+  },
+  "2. POST Wyślij dane logowania" : {
+    "transaction" : "2. POST Wyślij dane logowania",
+    "sampleCount" : 500,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 797.1460000000002,
+    "medianResTime" : 757.0,
+    "minResTime" : 91.0,
+    "maxResTime" : 1635.0,
+    "pct1ResTime" : 1397.3000000000002,
+    "pct2ResTime" : 1467.95,
+    "pct3ResTime" : 1595.8100000000002,
+    "throughput" : 24.34985877081913,
+    "receivedKBytesPerSec" : 807.9626035629931,
+    "sentKBytesPerSec" : 18.002820778951982
+  },
+  "Total" : {
+    "transaction" : "Total",
+    "sampleCount" : 1000,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 3908.8139999999976,
+    "medianResTime" : 1224.0,
+    "minResTime" : 91.0,
+    "maxResTime" : 19802.0,
+    "pct1ResTime" : 11699.3,
+    "pct2ResTime" : 12050.95,
+    "pct3ResTime" : 19749.9,
+    "throughput" : 47.288031399252844,
+    "receivedKBytesPerSec" : 981.1968194365631,
+    "sentKBytesPerSec" : 21.36005919870431
+  }
+}
