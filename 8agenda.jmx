@@ -11,8 +11,8 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Pracownicy" enabled="true">
-        <intProp name="ThreadGroup.num_threads">5</intProp>
-        <intProp name="ThreadGroup.ramp_time">5</intProp>
+        <intProp name="ThreadGroup.num_threads">10</intProp>
+        <intProp name="ThreadGroup.ramp_time">0</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController">
@@ -21,6 +21,18 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Użytkownicy CSV" enabled="true">
+          <stringProp name="filename">/home/picolls/jmeter/bin/data/dolibarr_users.csv</stringProp>
+          <stringProp name="fileEncoding">UTF-8</stringProp>
+          <stringProp name="variableNames">login,lastname,firstname,employee,job,gender,accountancy_code,password,admin,fk_soc,address,zip,town,fk_state,fk_country,office_phone,user_mobile,office_fax,email,note_public,note_private,signature,fk_user,thm,tjm,weeklyhours,dateemployment,dateemploymentend,salary,color,api_key,birth,datec,statut</stringProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+        </CSVDataSet>
+        <hashTree/>
         <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="Cookie Manager" enabled="true">
           <collectionProp name="CookieManager.cookies"/>
           <boolProp name="CookieManager.clearEachIteration">true</boolProp>
@@ -38,9 +50,9 @@
         <hashTree/>
 
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="1A. GET Logowanie" enabled="true">
-          <stringProp name="HTTPSampler.domain">server117859.nazwa.pl</stringProp>
+          <stringProp name="HTTPSampler.domain">server319942.nazwa.pl</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.path">/dolibarr/dolibarr/htdocs/index.php</stringProp>
+          <stringProp name="HTTPSampler.path">/Dolibarr/htdocs/index.php</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -58,9 +70,9 @@
         </hashTree>
 
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="1B. POST Logowanie" enabled="true">
-          <stringProp name="HTTPSampler.domain">server117859.nazwa.pl</stringProp>
+          <stringProp name="HTTPSampler.domain">server319942.nazwa.pl</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.path">/dolibarr/dolibarr/htdocs/index.php?mainmenu=home</stringProp>
+          <stringProp name="HTTPSampler.path">/Dolibarr/htdocs/index.php?mainmenu=home</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -82,17 +94,27 @@
               <elementProp name="dol_optimize_smallscreen" elementType="HTTPArgument"><stringProp name="Argument.name">dol_optimize_smallscreen</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="dol_no_mouse_hover" elementType="HTTPArgument"><stringProp name="Argument.name">dol_no_mouse_hover</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="dol_use_jmobile" elementType="HTTPArgument"><stringProp name="Argument.name">dol_use_jmobile</stringProp><stringProp name="Argument.value">0</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="username" elementType="HTTPArgument"><stringProp name="Argument.name">username</stringProp><stringProp name="Argument.value">hisentoki</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="password" elementType="HTTPArgument"><stringProp name="Argument.name">password</stringProp><stringProp name="Argument.value">zaq1@WSX</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="username" elementType="HTTPArgument"><stringProp name="Argument.name">username</stringProp><stringProp name="Argument.value">${login}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="password" elementType="HTTPArgument"><stringProp name="Argument.name">password</stringProp><stringProp name="Argument.value">${password}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
             </collectionProp>
           </elementProp>
         </HTTPSamplerProxy>
-        <hashTree/>
+        <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Wyciągnij ID Zalogowanego Użytkownika" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">user_id</stringProp>
+            <stringProp name="RegexExtractor.regex">auserid=(\d+),</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default">1</stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+        </hashTree>
 
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="2A. GET Formularz Wydarzenia" enabled="true">
-          <stringProp name="HTTPSampler.domain">server117859.nazwa.pl</stringProp>
+          <stringProp name="HTTPSampler.domain">server319942.nazwa.pl</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.path">/dolibarr/dolibarr/htdocs/comm/action/card.php</stringProp>
+          <stringProp name="HTTPSampler.path">/Dolibarr/htdocs/comm/action/card.php</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -119,9 +141,9 @@
         </hashTree>
 
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="2B. POST Dodaj Wydarzenie" enabled="true">
-          <stringProp name="HTTPSampler.domain">server117859.nazwa.pl</stringProp>
+          <stringProp name="HTTPSampler.domain">server319942.nazwa.pl</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.path">/dolibarr/dolibarr/htdocs/comm/action/card.php</stringProp>
+          <stringProp name="HTTPSampler.path">/Dolibarr/htdocs/comm/action/card.php</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
@@ -131,7 +153,7 @@
               <elementProp name="action" elementType="HTTPArgument"><stringProp name="Argument.name">action</stringProp><stringProp name="Argument.value">add</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="donotclearsession" elementType="HTTPArgument"><stringProp name="Argument.name">donotclearsession</stringProp><stringProp name="Argument.value">1</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="page_y" elementType="HTTPArgument"><stringProp name="Argument.name">page_y</stringProp><stringProp name="Argument.value"></stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
-              <elementProp name="actioncode" elementType="HTTPArgument"><stringProp name="Argument.name">actioncode</stringProp><stringProp name="Argument.value">50</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="actioncode" elementType="HTTPArgument"><stringProp name="Argument.name">actioncode</stringProp><stringProp name="Argument.value">1</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="label" elementType="HTTPArgument"><stringProp name="Argument.name">label</stringProp><stringProp name="Argument.value">Wydarzenie testowe JMeter ${__threadNum}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="typecode" elementType="HTTPArgument"><stringProp name="Argument.name">typecode</stringProp><stringProp name="Argument.value">AC_OTH</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
               <elementProp name="apday" elementType="HTTPArgument"><stringProp name="Argument.name">apday</stringProp><stringProp name="Argument.value">${__time(dd)}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
@@ -156,6 +178,8 @@
                 <stringProp name="Argument.value">Dodać</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
+              <elementProp name="userownerid" elementType="HTTPArgument"><stringProp name="Argument.name">userownerid</stringProp><stringProp name="Argument.value">${user_id}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
+              <elementProp name="assignedto[]" elementType="HTTPArgument"><stringProp name="Argument.name">assignedto[]</stringProp><stringProp name="Argument.value">${user_id}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>
             </collectionProp>
           </elementProp>
         </HTTPSamplerProxy>
