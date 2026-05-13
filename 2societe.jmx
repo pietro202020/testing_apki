@@ -11,7 +11,7 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Pracownicy" enabled="true">
-        <intProp name="ThreadGroup.num_threads">500</intProp>
+        <intProp name="ThreadGroup.num_threads">250</intProp>
         <intProp name="ThreadGroup.ramp_time">0</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -99,7 +99,18 @@
             </collectionProp>
           </elementProp>
         </HTTPSamplerProxy>
-        <hashTree/>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Sprawdź Sukces Logowania" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">logout</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message">Logowanie nieudane – brak linku wylogowania w odpowiedzi</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
 
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="2. GET Lista Kontrahentów" enabled="true">
           <stringProp name="HTTPSampler.domain">server319942.nazwa.pl</stringProp>
@@ -112,12 +123,12 @@
         <hashTree>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Sprawdź Listę Kontrahentów" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="49586">200</stringProp>
+              <stringProp name="49586">societe/card.php</stringProp>
             </collectionProp>
-            <stringProp name="Assertion.custom_message">Błąd ładowania listy kontrahentów</stringProp>
-            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <stringProp name="Assertion.custom_message">Błąd ładowania listy kontrahentów – brak treści listy (redirect na login?)</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
-            <intProp name="Assertion.test_type">8</intProp>
+            <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
